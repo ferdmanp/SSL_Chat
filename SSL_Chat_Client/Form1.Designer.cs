@@ -36,6 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbPort = new System.Windows.Forms.TextBox();
             this.cbUseSSL = new System.Windows.Forms.CheckBox();
+            this.tbLog = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbIpAddress
@@ -59,6 +61,7 @@
             this.tbChatMessages.Location = new System.Drawing.Point(12, 66);
             this.tbChatMessages.Multiline = true;
             this.tbChatMessages.Name = "tbChatMessages";
+            this.tbChatMessages.ReadOnly = true;
             this.tbChatMessages.Size = new System.Drawing.Size(329, 209);
             this.tbChatMessages.TabIndex = 2;
             // 
@@ -106,15 +109,35 @@
             this.cbUseSSL.Text = "Use SSL";
             this.cbUseSSL.UseVisualStyleBackColor = true;
             // 
+            // tbLog
+            // 
+            this.tbLog.Location = new System.Drawing.Point(361, 66);
+            this.tbLog.Multiline = true;
+            this.tbLog.Name = "tbLog";
+            this.tbLog.ReadOnly = true;
+            this.tbLog.Size = new System.Drawing.Size(238, 318);
+            this.tbLog.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(361, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "SSL Log";
+            // 
             // frmMainWin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 397);
+            this.ClientSize = new System.Drawing.Size(611, 397);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cbUseSSL);
             this.Controls.Add(this.tbPort);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.tbMessage);
+            this.Controls.Add(this.tbLog);
             this.Controls.Add(this.tbChatMessages);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -136,6 +159,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.CheckBox cbUseSSL;
+        private System.Windows.Forms.TextBox tbLog;
+        private System.Windows.Forms.Label label3;
     }
 }
 
