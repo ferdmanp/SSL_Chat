@@ -65,6 +65,10 @@ namespace RSA_WinServer
 
                     log($"Recieved data: {strData}{Environment.NewLine}");
 
+                    string strReply = $"Ответ: ваше сообщение: {strData}";
+                    byte[] reply = ByteConverter.GetBytes(strReply);
+                    handler.Send(reply);
+
                     if (strData.IndexOf("<END>") > -1)
                     {
                         log("Server closed connection to client");

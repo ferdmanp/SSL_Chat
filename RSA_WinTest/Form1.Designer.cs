@@ -131,7 +131,7 @@
             // 
             // btnInit
             // 
-            this.btnInit.Location = new System.Drawing.Point(205, 294);
+            this.btnInit.Location = new System.Drawing.Point(197, 294);
             this.btnInit.Name = "btnInit";
             this.btnInit.Size = new System.Drawing.Size(85, 31);
             this.btnInit.TabIndex = 1;
