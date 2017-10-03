@@ -14,6 +14,10 @@ namespace RSA_WinServer
 
         const int MAX_CONNECTION_QUEUE_LENGTH = 10;
         const int CONNECTION_PORT = 9999;
+        const int BUFFER_SIZE = 1024;
+
+        static Encoding ByteConverter = new UTF8Encoding();
+        
 
         static void Main(string[] args)
         {
@@ -22,7 +26,14 @@ namespace RSA_WinServer
             
 
             IPHostEntry host = Dns.GetHostEntry(Environment.MachineName);
-            IPAddress serverIp = host.AddressList[1];
+            IPAddress serverIp = host.AddressList[0];
+
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    serverIp = ip;
+            }
+
             IPEndPoint serverEndPoint = new IPEndPoint(serverIp, CONNECTION_PORT);
 
             Socket sListener = new Socket(serverIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -46,7 +57,20 @@ namespace RSA_WinServer
                             }
                         );
 
-                    
+                    byte[] data = new byte[BUFFER_SIZE];
+                    string strData = String.Empty;
+
+                    int dataCount = handler.Receive(data, BUFFER_SIZE, SocketFlags.None);
+                    strData += ByteConverter.GetString(data, 0, dataCount);
+
+                    log($"Recieved data: {strData}{Environment.NewLine}");
+
+                    if (strData.IndexOf("<END>") > -1)
+                    {
+                        log("Server closed connection to client");
+                        break;
+                    }
+
 
                     handler.Shutdown(SocketShutdown.Both);
                     handler.Close();

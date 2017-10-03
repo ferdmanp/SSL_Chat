@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_WinTest", "RSA_WinTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_WinServer", "RSA_WinServer\RSA_WinServer.csproj", "{F25E6246-A10D-4BB1-BBB8-FA1F7EB83578}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_ConsoleClient", "RSA_ConsoleClient\RSA_ConsoleClient.csproj", "{D8AA1670-0B9A-4550-A5C7-5A873E542247}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{F25E6246-A10D-4BB1-BBB8-FA1F7EB83578}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F25E6246-A10D-4BB1-BBB8-FA1F7EB83578}.Release|x64.ActiveCfg = Release|Any CPU
 		{F25E6246-A10D-4BB1-BBB8-FA1F7EB83578}.Release|x64.Build.0 = Release|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Debug|x64.Build.0 = Debug|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Release|x64.ActiveCfg = Release|Any CPU
+		{D8AA1670-0B9A-4550-A5C7-5A873E542247}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
