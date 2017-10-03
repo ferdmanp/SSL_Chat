@@ -12,14 +12,14 @@ using System.IO;
 
 namespace RSA_WinTest
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         List<String> Log;
         UnicodeEncoding ByteConverter = new UnicodeEncoding();
 
         RSAWrapper rsa;       
 
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
             Log = new List<string>();
@@ -64,9 +64,18 @@ namespace RSA_WinTest
         private void btnInit_Click(object sender, EventArgs e)
         {
             InitRSA();
-        }     
+        }
 
-        
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void chatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChatClient frm = new frmChatClient();
+            frm.Show();
+        }
     }
 }
 

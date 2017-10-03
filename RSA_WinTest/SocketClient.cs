@@ -22,6 +22,8 @@ namespace RSA_WinTest
         int port;
         Socket sHandler;
         private Encoding defaultByteConverter = new UTF8Encoding();
+
+        private LogMethod Logger;
         
         #endregion
 
@@ -52,10 +54,10 @@ namespace RSA_WinTest
                 {
                     this.localIp = ip;
                 }
-                else
-                {
-                    throw new ArgumentException("Cannot define local IP address!");
-                }
+                //else
+                //{
+                //    throw new ArgumentException("Cannot define local IP address!");
+                //}
             }
 
             if (String.IsNullOrEmpty(serverIpAddress))
@@ -83,9 +85,19 @@ namespace RSA_WinTest
 
         private void connect()
         {
-            sHandler = new Socket(serverIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint endPoint = new IPEndPoint(serverIp, port);
-            sHandler.Connect(endPoint);                        
+            try
+            {
+                Log("Starting connection");
+                sHandler = new Socket(serverIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                IPEndPoint endPoint = new IPEndPoint(serverIp, port);
+                sHandler.Connect(endPoint);
+                Log($"Connected to {endPoint.ToString()}");
+            }
+            catch (Exception exc)
+            {
+                LogError(exc.Message);
+                //throw;
+            }
             
         }
 
@@ -95,6 +107,7 @@ namespace RSA_WinTest
             {
                 sHandler.Close();
             }
+            Log("Connection closed");
         }
 
         private void checkConnection()
@@ -104,10 +117,20 @@ namespace RSA_WinTest
 
         public void SendMessage(string message, Encoding encoding)
         {
-            if (String.IsNullOrEmpty(message)) return;
-            checkConnection();
-            byte[] _byteMessage = encoding.GetBytes(message);
-            sHandler.Send(_byteMessage);
+            try
+            {
+                if (String.IsNullOrEmpty(message)) return;
+                checkConnection();
+                byte[] _byteMessage = encoding.GetBytes(message);
+                sHandler.Send(_byteMessage);
+                Log($"Message sent {message}");
+            }
+            catch (Exception exc)
+            {
+                LogError(exc.Message);
+                //throw;
+            }
+
         }
 
         
@@ -125,8 +148,8 @@ namespace RSA_WinTest
 
             byte[] msg_buffer = new byte[bufferSize];
             int bytesRecieved= sHandler.Receive(msg_buffer);
-            result = encoding.GetString(msg_buffer, 0, bytesRecieved);                        
-
+            result = encoding.GetString(msg_buffer, 0, bytesRecieved);
+            Log($"Message from server: {result}");
             return result;
         }
 
@@ -135,13 +158,43 @@ namespace RSA_WinTest
             return RecieveMessage(defaultByteConverter,bufferSize);
         }
 
-        public string ProcessMessages()
+        public string ProcessMessages(Encoding encoding)
         {
             string message = String.Empty;
+
+            do
+            {
+                message += RecieveMessage(encoding);
+            } while (message.IndexOf(ProtocolDescription.EndOfMessage) == -1);
+
             return message;
             
         }
 
+        public string ProcessMessages()
+        {
+            return ProcessMessages(defaultByteConverter);
+        }
+
+
+        #endregion
+
+        #region --LOGGING--
+
+        public void RegisterLogger(LogMethod logger)
+        {
+            this.Logger += logger;
+        }
+
+        public void Log(string Message)
+        {
+            this.Logger(Message);
+        }
+
+        public void LogError(string Message)
+        {
+            this.Logger($"ERROR: {Message}");
+        }
 
         #endregion
     }
