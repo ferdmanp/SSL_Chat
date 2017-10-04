@@ -45,7 +45,7 @@ namespace RSA_WinServer
         {
             try
             {
-                tcpListener = new TcpListener(new IPEndPoint(IPAddress.Parse("192.168.10.60"), 9999));
+                tcpListener = new TcpListener(getMyIp()??IPAddress.Any, 9999);
                 tcpListener.Start();
                 Log($"Server started! Address: {tcpListener.LocalEndpoint.ToString()}  Waiting for connection");
 
@@ -87,6 +87,12 @@ namespace RSA_WinServer
             Environment.Exit(0);
         }
 
+        private IPAddress getMyIp()
+        {
+            IPHostEntry entry = Dns.GetHostEntry(Environment.MachineName);
+            return entry.AddressList.FirstOrDefault(s => s.AddressFamily == AddressFamily.InterNetwork);
+
+        }
 
         #endregion
 
