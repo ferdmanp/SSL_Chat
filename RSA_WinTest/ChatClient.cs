@@ -50,7 +50,10 @@ namespace RSA_WinTest
         #region --METHODS--
         public void Connect()
         {
-            client.Connect(ipHost, port);
+            if (!client.Connected)
+            {
+                client.Connect(ipHost, port);
+            }
             stream = client.GetStream();
 
             SendMessage(userName);
@@ -58,11 +61,11 @@ namespace RSA_WinTest
 
         void SendMessage(string message)
         {
-            while (true)
-            {
+            //while (true)
+            //{
                 byte[] data = ByteConverter.GetBytes(message);
-                stream.Write(data,0,data.Length);
-            }
+                stream.Write(data,0,(int)data.Length);
+            //}
         }
 
         void RecieveMessage()

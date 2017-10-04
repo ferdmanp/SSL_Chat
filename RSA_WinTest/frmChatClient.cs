@@ -105,7 +105,7 @@ namespace RSA_WinTest
             if (String.IsNullOrEmpty(tbUserName.Text)) return;
             string username = tbUserName.Text;
             ChatClient client = new ChatClient(
-                "192.168.10.60",
+                "192.168.88.250",
                 9999,
                 username
                 );

@@ -20,7 +20,7 @@ namespace RSA_WinServer
         ServerObject server;
         LogMethod Log= Console.WriteLine;
         Encoding byteConverter = new UTF8Encoding();
-        private readonly int DEFAULT_BUFFER_SIZE=1024;
+        private readonly int DEFAULT_BUFFER_SIZE=64;
         #endregion
 
         #region --PROPS--
@@ -49,6 +49,7 @@ namespace RSA_WinServer
                 string message = GetMessage();
                 userName = message;
                 message = $"{userName} вошел в чат";
+                Log(message);
                 server.BroadCastMessage(message, this.Id);
 
                 //message recieving cycle
@@ -95,15 +96,17 @@ namespace RSA_WinServer
         private string GetMessage()
         {
             byte[] data = new byte[DEFAULT_BUFFER_SIZE];
-            string message = String.Empty;
+            //string message = String.Empty;
+            StringBuilder message = new StringBuilder();
             int bytesCount = 0;
             do
             {
                 bytesCount = Stream.Read(data, 0, data.Length);
-                message += byteConverter.GetString(data, 0, bytesCount);
+                //message += byteConverter.GetString(data, 0, bytesCount);
+                message.Append(byteConverter.GetString(data, 0, bytesCount));
             } while (Stream.DataAvailable);
 
-            return message;
+            return message.ToString();
             
         }
         #endregion
