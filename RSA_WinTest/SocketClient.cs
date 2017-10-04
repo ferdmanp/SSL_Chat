@@ -165,7 +165,7 @@ namespace RSA_WinTest
             do
             {
                 message += RecieveMessage(encoding);
-            } while (message.IndexOf(ProtocolDescription.EndOfMessage) == -1);
+            } while (message.IndexOf(ProtocolDescription.MessageEnd) == -1);
 
             return message;
             

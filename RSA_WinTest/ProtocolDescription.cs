@@ -8,6 +8,8 @@ namespace RSA_WinTest
 {
     public static class ProtocolDescription
     {
-        public static string EndOfMessage = "<END>";
+        public static string MessageEnd = "<END>";
+        public static string MessageStart = "<START>";
+
     }
 }
