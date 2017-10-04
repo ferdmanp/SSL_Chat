@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RSA_WinServer
 {
-
+    //https://metanit.com/sharp/net/4.4.php
     public delegate void LogMethod(string message);
 
     public class ClientObject

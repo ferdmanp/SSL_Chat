@@ -99,5 +99,17 @@ namespace RSA_WinTest
             if (e.Control && e.KeyCode == Keys.Enter)
                 btnSend_Click(sender, e);
         }
+
+        private void btnConnect_Click_1(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(tbUserName.Text)) return;
+            string username = tbUserName.Text;
+            ChatClient client = new ChatClient(
+                "192.168.10.60",
+                9999,
+                username
+                );
+            client.Connect();
+        }
     }
 }
