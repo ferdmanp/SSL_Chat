@@ -20,6 +20,6 @@ namespace RSA_ChatService.interfaces
         string SendMessage(string message, int recipientId);
 
         [OperationContract]
-        string RecieveMessagesById(int clientId);
+        List<ChatMessage> RecieveMessagesById(int clientId);
     }
 }

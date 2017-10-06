@@ -12,7 +12,10 @@ namespace ConsoleApplication1
         {
             ChatServiceProxy proxy = new ChatServiceProxy();
             Console.WriteLine("Client is running at " + DateTime.Now.ToString());
-            Console.WriteLine("Sum of two numbers... 5+5 =" + proxy.Register("Test", "Test Me"));
+            string nickName = "voltage";
+            var client=proxy.Register(nickName);
+            Console.WriteLine(client.Id);
+            Console.WriteLine(proxy.GetConnectionsList().Count);
             Console.ReadLine();
 
         }

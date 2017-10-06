@@ -45,6 +45,7 @@
     <Compile Include="Chat.cs" />
     <Compile Include="ChatClient.cs" />
     <Compile Include="ChatMessage.cs" />
+    <Compile Include="FileLogger.cs" />
     <Compile Include="interfaces\IChat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
