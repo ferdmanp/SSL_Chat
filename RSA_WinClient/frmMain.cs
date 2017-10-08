@@ -248,5 +248,43 @@ namespace RSA_WinClient
             if (e.KeyCode == Keys.Enter && e.Control)
                 btnSend_Click(sender, e);
         }
+
+        private void tbMessage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbMessages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(tbUserName.Text))
+            {
+                this.UserName = tbUserName.Text;
+                UpdateHeader();
+                Connect();
+                currentClient = svc.Register(this.UserName);
+                if (this.myRsa != null)
+                {
+                    svc.SetSecurityParams(currentClient, myRsa.PublicKey);
+                }
+            }
+
+            tbUserName.Enabled = false;
+            btnConnect.Text = "Disconnect";
+            btnConnect.Click -= btnConnect_Click;
+            btnConnect.Click += btnDisconnectClick;
+        }
+
+        private void btnDisconnectClick(object sender, EventArgs e)
+        {
+            Disconnect();
+            btnConnect.Text = "Connect";
+            btnConnect.Click += btnConnect_Click;
+            btnConnect.Click -= btnDisconnectClick;
+        }
     }
 }

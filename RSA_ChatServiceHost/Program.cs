@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Net;
+using System.Net.Sockets;
 
 namespace RSA_ChatServiceHost
 {
@@ -15,8 +17,12 @@ namespace RSA_ChatServiceHost
             //Uri tcpEndpointUri = new Uri("net.tcp://localhost:9999/Services/ChatService");
             //Uri httpEndpointUri = new Uri("http://localhost:9999/Services/ChatService");
 
+
+            string endpointuri = $"net.tcp://{GetLocalIpV4()}:9999/Services/ChatService";
+
             Uri[] endPointsUris = {
-                 new Uri("net.tcp://localhost:9999/Services/ChatService")
+                 //new Uri("net.tcp://localhost:9999/Services/ChatService")
+                 new Uri(endpointuri)
                 //,new Uri("http://localhost:9999/Services/ChatService")
             };
 
@@ -40,7 +46,7 @@ namespace RSA_ChatServiceHost
             {
 
                 host.Open();
-                Console.WriteLine($"Service started! {DateTime.Now.ToString()}");
+                Console.WriteLine($"Service started on {host.BaseAddresses.FirstOrDefault()}! {DateTime.Now.ToString()}");
                 Console.WriteLine($"Press any key to stop");
                 Console.ReadKey();
             }
@@ -50,6 +56,18 @@ namespace RSA_ChatServiceHost
                 Console.WriteLine($"Press any key to stop");
                 Console.ReadKey();
             }
+        }
+
+        static string GetLocalIpV4()
+        {
+            string result = String.Empty;
+            var host = Dns.GetHostEntry(Environment.MachineName);
+            IPAddress address = host.AddressList.FirstOrDefault(p => 
+                                        p.AddressFamily == AddressFamily.InterNetwork                                    
+                                    );
+            if (address != null)
+                result = address.ToString();
+            return result;
         }
     }
 }

@@ -81,8 +81,8 @@ namespace RSA_ChatService
             var _recipientConnection = _connectedClients
                                             .FirstOrDefault(p => p.Id == recipient.Id);
             _recipientConnection.AddMessage(msg);
-            //Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message}");
-            Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message.Length.ToString()}");
+            Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message}");
+            //Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message.Length.ToString()}");
             return msg;            
         }
 
