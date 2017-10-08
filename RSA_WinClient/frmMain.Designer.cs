@@ -42,6 +42,7 @@
             this.lbMessages = new System.Windows.Forms.ListBox();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
+            this.lbLog = new System.Windows.Forms.ListBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +74,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 357);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(543, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(711, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -90,7 +91,7 @@
             this.actionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(543, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(711, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -147,12 +148,11 @@
             this.lbMessages.Name = "lbMessages";
             this.lbMessages.Size = new System.Drawing.Size(375, 199);
             this.lbMessages.TabIndex = 0;
-            this.lbMessages.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // tbMessage
             // 
             this.tbMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbMessage.Location = new System.Drawing.Point(157, 245);
+            this.tbMessage.Location = new System.Drawing.Point(156, 245);
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -170,11 +170,20 @@
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
+            // lbLog
+            // 
+            this.lbLog.FormattingEnabled = true;
+            this.lbLog.Location = new System.Drawing.Point(538, 40);
+            this.lbLog.Name = "lbLog";
+            this.lbLog.Size = new System.Drawing.Size(161, 277);
+            this.lbLog.TabIndex = 6;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 379);
+            this.ClientSize = new System.Drawing.Size(711, 379);
+            this.Controls.Add(this.lbLog);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.statusStrip1);
@@ -211,6 +220,7 @@
         private System.Windows.Forms.ListBox lbMessages;
         private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.ListBox lbLog;
     }
 }
 

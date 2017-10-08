@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,8 +81,15 @@ namespace RSA_ChatService
             var _recipientConnection = _connectedClients
                                             .FirstOrDefault(p => p.Id == recipient.Id);
             _recipientConnection.AddMessage(msg);
-            Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message}");
+            //Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message}");
+            Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message.Length.ToString()}");
             return msg;            
+        }
+
+        public void SetSecurityParams(ChatClient client, RSAParameters publicKey)
+        {
+            var _client = _connectedClients.FirstOrDefault(p => p.Id == client.Id);
+            _client.PublicKey = publicKey;
         }
     }
 }

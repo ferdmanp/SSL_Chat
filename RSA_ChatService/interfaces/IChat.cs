@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace RSA_ChatService.interfaces
 {
@@ -12,6 +13,10 @@ namespace RSA_ChatService.interfaces
     {
         [OperationContract]
         ChatClient Register(string clientName);
+
+        [OperationContract]
+        void SetSecurityParams(ChatClient client, RSAParameters publicKey);
+            
 
         [OperationContract]
         void Unregister(ChatClient client);

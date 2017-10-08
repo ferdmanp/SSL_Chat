@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_WinClient", "RSA_WinCli
 		{8E4C3974-CD6E-40E1-BEDE-AA539FB17E06} = {8E4C3974-CD6E-40E1-BEDE-AA539FB17E06}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_CryptLib", "RSA_CryptLib\RSA_CryptLib.csproj", "{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,14 @@ Global
 		{55BDDC5F-79E6-4741-ACAD-4B5845231E29}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55BDDC5F-79E6-4741-ACAD-4B5845231E29}.Release|x64.ActiveCfg = Release|Any CPU
 		{55BDDC5F-79E6-4741-ACAD-4B5845231E29}.Release|x64.Build.0 = Release|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Debug|x64.Build.0 = Debug|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Release|x64.ActiveCfg = Release|Any CPU
+		{82846B99-0887-43B2-A7B9-1DC68BD3F3A4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

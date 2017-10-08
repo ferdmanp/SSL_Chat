@@ -96,6 +96,10 @@
       <Project>{a3b120c5-fc4a-44fc-9571-c01e059344aa}</Project>
       <Name>RSA_ChatService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RSA_CryptLib\RSA_CryptLib.csproj">
+      <Project>{82846b99-0887-43b2-a7b9-1dc68bd3f3a4}</Project>
+      <Name>RSA_CryptLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

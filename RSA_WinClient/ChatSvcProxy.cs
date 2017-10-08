@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ServiceModel;
 using RSA_ChatService.interfaces;
 using RSA_ChatService;
+using System.Security.Cryptography;
 
 namespace RSA_WinClient
 {
@@ -38,6 +39,11 @@ namespace RSA_WinClient
         {
             //throw new NotImplementedException();
             return base.Channel.SendMessageAnonymous(message, recipientId);
+        }
+
+        public void SetSecurityParams(ChatClient client, RSAParameters publicKey)
+        {
+            base.Channel.SetSecurityParams(client, publicKey);
         }
 
         public void Unregister(ChatClient client)

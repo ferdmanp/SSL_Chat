@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace RSA_ChatService
 {
@@ -18,6 +19,10 @@ namespace RSA_ChatService
 
         [DataMember]
         public bool IsOnline { get; internal set; }
+
+        [DataMember]
+        public RSAParameters PublicKey { get; set; }
+
 
         Queue<ChatMessage> messages;
 

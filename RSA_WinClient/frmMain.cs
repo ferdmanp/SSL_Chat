@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using RSA_CryptLib;
 
 namespace RSA_WinClient
 {
@@ -22,22 +24,43 @@ namespace RSA_WinClient
         RSA_ChatService.ChatClient currentClient;
         BindingList<RSA_ChatService.ChatClient> clients = new BindingList<RSA_ChatService.ChatClient>();
         BindingList<RSA_ChatService.ChatMessage> messages = new BindingList<RSA_ChatService.ChatMessage>();
+        BindingList<string> log = new BindingList<string>();
         Timer refreshTimer = new Timer();
         BackgroundWorker bgThread = new BackgroundWorker();
 
+        
 
+        RSAWrapper myRsa;
+        RSAParameters publicKey;
+        RSAParameters privateKey;
+
+        Encoding ByteConverter = new UTF8Encoding();
         public frmMain()
         {
             InitializeComponent();
             svc = new ChatSvcProxy();
             lbOnlineClients.DataSource = clients;
             lbMessages.DataSource = messages;
+            lbLog.DataSource = log;
             refreshTimer.Interval = 200;//ms
             refreshTimer.Tick += RefreshTimer_Tick;
             bgThread.WorkerSupportsCancellation = true;
             bgThread.DoWork += BgThread_DoWork;
-            bgThread.RunWorkerCompleted += BgThread_RunWorkerCompleted;            
+            bgThread.RunWorkerCompleted += BgThread_RunWorkerCompleted;
 
+            InitRSA();
+
+        }
+
+        private void InitRSA()
+        {
+            myRsa = new RSAWrapper();
+            myRsa.Log = log.Add;
+        }
+
+        private void WriteLog(string message)
+        {
+            throw new NotImplementedException();
         }
 
         private void BgThread_RunWorkerCompleted
@@ -89,7 +112,11 @@ namespace RSA_WinClient
             this.UserName = frmLogin.UserName;             
             UpdateHeader();
             Connect();
-            currentClient = svc.Register(this.UserName);         
+            currentClient = svc.Register(this.UserName);
+            if (this.myRsa != null)
+            {
+                svc.SetSecurityParams(currentClient, myRsa.PublicKey);
+            }
             
         }
 
@@ -145,6 +172,15 @@ namespace RSA_WinClient
             var messages = svc.RecieveMessagesById(currentClient.Id);
             foreach (var item in messages)
             {
+                //myRsa.Decrypt()
+                log.Add(item.MessageText.Length.ToString());
+                byte[] bytesCrypted = Convert.FromBase64String(item.MessageText);
+                    //ByteConverter.GetBytes(item.MessageText);
+                log.Add(bytesCrypted.Length.ToString());
+                //System.Threading.Thread.CurrentThread.Suspend();
+                byte[] bytesDecrypted = myRsa.Decrypt(bytesCrypted, myRsa.PrivateKey);
+                item.MessageText = //Convert.ToBase64String(bytesDecrypted);
+                    ByteConverter.GetString(bytesDecrypted);
                 this.messages.Add(item);
             }
         }
@@ -187,9 +223,20 @@ namespace RSA_WinClient
         {
             if (!String.IsNullOrEmpty(tbMessage.Text))
             {
-                string message = tbMessage.Text;
-                RSA_ChatService.ChatClient recipient = (RSA_ChatService.ChatClient)lbOnlineClients.SelectedItem;                
-                var chatMessage = svc.SendMessage(message, this.currentClient, recipient);                
+                string msgSrc = tbMessage.Text;
+                //string message
+                RSA_ChatService.ChatClient recipient = (RSA_ChatService.ChatClient)lbOnlineClients.SelectedItem;
+                byte[] cryptedBytes = myRsa.Encrypt(ByteConverter.GetBytes(msgSrc), recipient.PublicKey);
+                            //myRsa.Encrypt(Convert.FromBase64String(message), recipient.PublicKey);
+                log.Add(cryptedBytes.Length.ToString());
+                string cryptedMessage = Convert.ToBase64String(cryptedBytes);
+                            //ByteConverter.GetString(cryptedBytes);
+                            //Convert.ToBase64String(cryptedBytes);
+                log.Add(cryptedMessage.Length.ToString());
+
+                var chatMessage = svc.SendMessage(cryptedMessage, this.currentClient, recipient);
+                    //svc.SendMessage(Convert.ToBase64String(cryptedMessage), this.currentClient, recipient);
+                chatMessage.MessageText = msgSrc;
                 messages.Add(chatMessage);
                 tbMessage.Clear();
                 tbMessage.Focus();                
