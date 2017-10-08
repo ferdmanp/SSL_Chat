@@ -24,12 +24,21 @@ namespace ConsoleApplication1
         public ChatClient Register(string clientName)
         {
             return base.Channel.Register(clientName);
-        }       
-        
+        }
 
-        public string SendMessage(string message, int recipientId)
+        public ChatMessage SendMessage(string message, ChatClient sender, ChatClient recipient)
         {
-            return base.Channel.SendMessage(message, recipientId);
+            throw new NotImplementedException();
+        }
+
+        public string SendMessageAnonymous(string message, int recipientId)
+        {
+            return base.Channel.SendMessageAnonymous(message, recipientId);
+        }
+
+        public void Unregister(ChatClient client)
+        {
+            throw new NotImplementedException();
         }
     }
 }

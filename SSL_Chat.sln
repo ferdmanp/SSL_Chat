@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{CDF1C806-77B3-4906-8AB6-0AF25D3362FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_WinClient", "RSA_WinClient\RSA_WinClient.csproj", "{55BDDC5F-79E6-4741-ACAD-4B5845231E29}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E4C3974-CD6E-40E1-BEDE-AA539FB17E06} = {8E4C3974-CD6E-40E1-BEDE-AA539FB17E06}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

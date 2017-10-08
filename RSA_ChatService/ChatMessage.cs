@@ -14,8 +14,29 @@ namespace RSA_ChatService
         public string MessageText { get; set; }
 
         [DataMember]
-        public string MessageId { get; internal set; }
+        public string MessageId { get;  set; }
         
+        [DataMember]
+        public ChatClient Sender { get; set; }
+
+        [DataMember]
+        public ChatClient Recipient { get; set; }
+
+        [DataMember]
+        public DateTime DateTimeRecieved { get; private set; }        
+
         public bool Sent;
+
+        public ChatMessage()
+        {
+            this.DateTimeRecieved = DateTime.Now;
+        }
+
+        public override string ToString()
+        {
+            string message = $"{Sender.NickName}: {MessageText}";
+            return message;
+        }
+
     }
 }

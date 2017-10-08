@@ -14,7 +14,7 @@ namespace RSA_ChatService
     public class Chat : IChat
     {
 
-        static List<ChatClient> _connections = new List<ChatClient>();
+        static List<ChatClient> _connectedClients = new List<ChatClient>();
         static int maxId = 0;
         public LogMethod Log;
 
@@ -25,14 +25,14 @@ namespace RSA_ChatService
 
         public List<ChatClient> GetConnectionsList()
         {
-            return Chat._connections;
+            return Chat._connectedClients;
         }
 
-        public string SendMessage(string message, int recipientId)
+        public string SendMessageAnonymous(string message, int recipientId)
         {
             Log($"SendMessage({message},{recipientId})");
             string messageGuid = String.Empty;
-            var connection = _connections.FirstOrDefault(s => s.Id == recipientId);
+            var connection = _connectedClients.FirstOrDefault(s => s.Id == recipientId);
             if (connection != null)
             {
                 ChatMessage chatMessage = new ChatMessage();
@@ -40,13 +40,13 @@ namespace RSA_ChatService
                 chatMessage.MessageId = Guid.NewGuid().ToString();
                 messageGuid= chatMessage.MessageId;
             }
-            return messageGuid;
-            
+            return messageGuid;            
         }
 
         public List<ChatMessage> RecieveMessagesById(int clientId)
         {
-            var connection = _connections.FirstOrDefault(s => s.Id == clientId);
+            var connection = _connectedClients.FirstOrDefault(s => s.Id == clientId);
+            if (connection == null) return new List<ChatMessage>();
             return connection.GetMessages();
         }
 
@@ -56,9 +56,32 @@ namespace RSA_ChatService
             ChatClient connection = new ChatClient(nickName);
             connection.Id = ++maxId;
             connection.IsOnline = true;
-            _connections.Add(connection);
+            _connectedClients.Add(connection);
             Log($"Client registered: {nickName}. Id={connection.Id}");
             return connection;
+        }
+
+        public void Unregister(ChatClient client)
+        {
+            //throw new NotImplementedException();
+            _connectedClients.Remove(client);
+            Log($"Client {client}  unregistered!");
+        }
+
+        public ChatMessage SendMessage(string message, ChatClient sender, ChatClient recipient)
+        {
+            string newId = Guid.NewGuid().ToString();
+            ChatMessage msg = new ChatMessage();
+            msg.MessageId = newId;
+            msg.MessageText = message;
+            msg.Sender = sender;
+            msg.Recipient = recipient;
+
+            var _recipientConnection = _connectedClients
+                                            .FirstOrDefault(p => p.Id == recipient.Id);
+            _recipientConnection.AddMessage(msg);
+            Log($"SendMessage([{DateTime.Now.ToString()}]{sender.Id}>>{recipient.Id}: {message}");
+            return msg;            
         }
     }
 }

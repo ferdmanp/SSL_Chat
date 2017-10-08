@@ -25,9 +25,17 @@ namespace RSA_ChatServiceHost
             //host.AddServiceEndpoint(typeof(RSA_ChatService.interfaces.IChat), new WSHttpBinding(), "");
             host.AddServiceEndpoint(typeof(RSA_ChatService.interfaces.IChat), new NetTcpBinding(), "");
 
+            //host.AddServiceEndpoint(typeof(IMetadataExchange), new NetTcpBinding(), $"mex");
+
             var smb = new ServiceMetadataBehavior();
+            smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
+            
+            
           //  smb.HttpGetEnabled = true;
             host.Description.Behaviors.Add(smb);
+            host.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName,
+                                    MetadataExchangeBindings.CreateMexTcpBinding(), 
+                                    "mex");
             try
             {
 

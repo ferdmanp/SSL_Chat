@@ -36,7 +36,7 @@
             // 
             this.btnLogin.Location = new System.Drawing.Point(13, 39);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(138, 23);
+            this.btnLogin.Size = new System.Drawing.Size(148, 23);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -46,7 +46,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(13, 13);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 20);
+            this.textBox1.Size = new System.Drawing.Size(148, 20);
             this.textBox1.TabIndex = 1;
             this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(163, 74);
+            this.ClientSize = new System.Drawing.Size(173, 74);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnLogin);
             this.Name = "frmLogin";

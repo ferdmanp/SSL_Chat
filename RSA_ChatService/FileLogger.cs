@@ -14,6 +14,6 @@ namespace RSA_ChatService
             {
                 stream.Write($"{DateTime.Now}:{message}{Environment.NewLine}");
             }
-        }
+        }        
     }
 }

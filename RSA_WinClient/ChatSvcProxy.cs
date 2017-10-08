@@ -9,7 +9,7 @@ using RSA_ChatService;
 
 namespace RSA_WinClient
 {
-    class ChatSvcProxy : ClientBase<Chat>, IChat
+    class ChatSvcProxy : ClientBase<IChat>, IChat
     {
         public List<ChatClient> GetConnectionsList()
         {
@@ -29,10 +29,20 @@ namespace RSA_WinClient
             return base.Channel.Register(clientName);
         }
 
-        public string SendMessage(string message, int recipientId)
+        public ChatMessage SendMessage(string message, ChatClient sender, ChatClient recipient)
+        {
+            return base.Channel.SendMessage(message, sender, recipient);
+        }
+
+        public string SendMessageAnonymous(string message, int recipientId)
         {
             //throw new NotImplementedException();
-            return base.Channel.SendMessage(message, recipientId);
+            return base.Channel.SendMessageAnonymous(message, recipientId);
+        }
+
+        public void Unregister(ChatClient client)
+        {
+            base.Channel.Unregister(client);
         }
     }
 }

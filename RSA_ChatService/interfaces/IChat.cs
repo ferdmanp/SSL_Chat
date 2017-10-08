@@ -14,10 +14,16 @@ namespace RSA_ChatService.interfaces
         ChatClient Register(string clientName);
 
         [OperationContract]
+        void Unregister(ChatClient client);
+
+        [OperationContract]
         List<ChatClient> GetConnectionsList();
 
         [OperationContract]
-        string SendMessage(string message, int recipientId);
+        string SendMessageAnonymous(string message, int recipientId);
+
+        [OperationContract]
+        ChatMessage SendMessage(string message, ChatClient sender, ChatClient recipient);
 
         [OperationContract]
         List<ChatMessage> RecieveMessagesById(int clientId);

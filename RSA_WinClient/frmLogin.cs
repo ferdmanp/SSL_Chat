@@ -12,16 +12,19 @@ namespace RSA_WinClient
 {
     public partial class frmLogin : Form
     {
+        public string UserName { get; set; }
+
         public frmLogin()
         {
             InitializeComponent();
+            textBox1.Focus();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(textBox1.Text))
             {
-                frmMain.UserName = textBox1.Text;
+                this.UserName = textBox1.Text;
                 Close();
             }
         }
